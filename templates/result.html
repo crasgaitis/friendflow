@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Speech Sentiment Analysis Results</title>
+</head>
+<body>
+  <h1>Speech Sentiment Analysis Results</h1>
+  <p><strong>Detected Language:</strong> {{ language }}</p>
+  <p><strong>Translated Text:</strong> {{ text }}</p>
+  <p><strong>Sentiment Analysis:</strong> {{ sentiment }}</p>
+  <p><strong>Suggestsed Response:</strong> {{ suggested_response }}</p>
+  {% if recommendation %}
+    <div style="color: red;">
+      <p><strong>Warning:</strong> Potential threat detected. Please call EMS immediately.</p>
+    </div>
+  {% endif %}
+</body>
+</html>

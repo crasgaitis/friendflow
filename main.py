@@ -21,7 +21,7 @@ os.environ["OPENAI_API_KEY"] = "sk-8D5YNRaf1duSwQRRa1UFT3BlbkFJkCldcyYBhBsndtO1l
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
 
-# Initialize sentiment analyzer
+# sentiment analyzer
 # nltk.download('vader_lexicon')
 # sid = SentimentIntensityAnalyzer()
 
@@ -35,7 +35,7 @@ with open('tfidf_vectorizer.pkl', 'rb') as f:
     vectorizer = pickle.load(f)
 
 
-# Home page
+# Home
 @app.route('/')
 def home():
     return render_template('index.html', languages=LANGUAGES)
@@ -97,7 +97,7 @@ def analyze():
 
     sentiment = emotion_map[sentiment]
     
-    # Check for threats
+    # Check for threats (fix this, just to check if certain words denoting violence are present)
     if sentiment == 'neg' and 'call EMS' in text:
         recommendation = 'Please call EMS immediately!'
     else:
