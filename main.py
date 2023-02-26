@@ -13,10 +13,12 @@ import speech_recognition as sr
 import io
 import openai
 import os
+import re
+from gtts import gTTS
 
 
 app = Flask(__name__)
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = "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"
 
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
@@ -25,7 +27,7 @@ openai.api_key = os.environ["OPENAI_API_KEY"]
 # nltk.download('vader_lexicon')
 # sid = SentimentIntensityAnalyzer()
 
-# Load XGBoost model
+# Load XGBoost model, tokenizer, vectorizer
 with open('sentiment_model.pkl', 'rb') as f:
     model = pickle.load(f)
     
@@ -44,7 +46,7 @@ def home():
 @app.route('/analyze', methods=['POST'])
 def analyze():
     
-    if True:
+    if request.form['input'] == 'audio':
     #if 'audio' in request.files.keys():
         # Convert audio file to text
         r = sr.Recognizer()
@@ -98,8 +100,10 @@ def analyze():
     sentiment = emotion_map[sentiment]
     
     # Check for threats (fix this, just to check if certain words denoting violence are present)
-    if sentiment == 'neg' and 'call EMS' in text:
-        recommendation = 'Please call EMS immediately!'
+    threat_regex = r'\b(kill|die|murder|assassinate|destroy)\b'
+
+    if re.search(threat_regex, text):
+        recommendation = 'You might be in danger. Please call EMS immediately!'
     else:
         recommendation = None
     
@@ -107,7 +111,7 @@ def analyze():
         response = openai.Completion.create(
         engine="davinci",
         prompt=prompt,
-        max_tokens=60,
+        max_tokens=30,
         n=1,
         stop=None,
         temperature=0.5,
@@ -116,8 +120,33 @@ def analyze():
         message = response.choices[0].text.strip()
         return message
     
-    suggested_response = generate_response(text)
-    return render_template('result.html', text=text, sentiment=sentiment, recommendation=recommendation)
+    string = f"Give me an example response from Person B. Person A: '{text}' Person B: "
+    
+    # suggested_response = generate_response(string)
+    suggested_response = 'what is my name? my name is catherine.'
+    suggested_response = suggested_response.split("Person A:")[0]
+    suggested_response = suggested_response.strip().replace("'", "")
+
+
+    suggested_response2 = translate(suggested_response, to_language=language)
+    
+    language_map = {
+        'en': 'english',
+        'es': 'spanish',
+        'zh': 'chinese (simplified)',
+        'fr': 'french',
+        'ko': 'korean',
+        'de': 'german'
+    }
+
+    
+    tts = gTTS(text=suggested_response2, lang=language)
+    tts.save('audio.mp3')
+
+    
+    language = language_map[language]
+    
+    return render_template('result.html', text=text, language = language, sentiment=sentiment, recommendation=recommendation, message=suggested_response, tr_message = suggested_response2)
 
 if __name__ == '__main__':
     app.run(debug=True)

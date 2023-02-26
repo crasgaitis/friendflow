@@ -1,0 +1,58 @@
+html, body {
+    height: 100vh;
+}
+
+*{
+    font-family: 'Trebuchet MS'
+}
+
+
+h1{
+    font-family: 'Concert One', cursive;
+}
+
+p, label{
+    font-size: 17px
+}
+
+textarea{
+    margin: 25px;
+    border-radius: 10px;
+
+}
+
+#wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -20px
+  }
+  
+  #everything{
+    display: block;
+    margin: 0 auto;
+    min-width: 400px;
+    width: 25vw;
+    border-radius: 25px;
+    background-color: lightblue;
+    text-align: center;
+    padding: 40px;
+
+  }
+
+  .flag {
+    position: absolute;
+    color: black;
+    animation-name: flag-animation;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    opacity: 0;
+  }
+  
+  @keyframes flag-animation {
+    0% {opacity: 0;}
+    5% {opacity: 1;}
+    90% {opacity: 1;}
+    100% {opacity: 0;}
+  }

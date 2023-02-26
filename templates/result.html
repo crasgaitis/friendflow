@@ -3,17 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <title>Speech Sentiment Analysis Results</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
 <body>
   <h1>Speech Sentiment Analysis Results</h1>
-  <p><strong>Detected Language:</strong> {{ language }}</p>
+  <p><strong>Language:</strong> {{ language }}</p>
   <p><strong>Translated Text:</strong> {{ text }}</p>
   <p><strong>Sentiment Analysis:</strong> {{ sentiment }}</p>
-  <p><strong>Suggestsed Response:</strong> {{ suggested_response }}</p>
+  <p><strong>Suggested Response:</strong> {{ message }}</p>
+  <p><strong>Translated Suggestion:</strong> {{ tr_message }}</p>
   {% if recommendation %}
     <div style="color: red;">
       <p><strong>Warning:</strong> Potential threat detected. Please call EMS immediately.</p>
     </div>
   {% endif %}
-</body>
+
+  <button type = 'button' onclick="speak()">Speak</button>
+
+  <script>
+    var language = "{{ language }}";
+    var tr_message = "{{ tr_message }}";
+
+    var language_map = {
+      'english': 'en',
+      'spanish': 'es',
+      'chinese (simplified)': 'zh',
+      'french': 'fr',
+      'korean': 'ko',
+      'german': 'de'
+    };
+
+    var language_code = language_map[language];
+
+    function speak() {
+      var tts = new window.SpeechSynthesisUtterance(tr_message);
+      tts.lang = language_code;
+      window.speechSynthesis.speak(tts);
+    }
+
+  </script>
+
+
+  </body>
 </html>
