@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Speech Sentiment Analysis</title>
+  <title>Friend Flow</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
@@ -11,38 +11,126 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands"></script>
 
+	<style>
+		html, body {
+			height: 100vh;
+			overflow: hidden
+		}
+		
+		body{
+			background-image: url("https://cdn.discordapp.com/attachments/1033649673115799563/1079211007035048047/image1.jpg");
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+		
+		*{
+			font-family: 'Trebuchet MS'
+		}
+		
+		
+		h1{
+			font-family: 'Concert One', cursive;
+		}
+		
+		p, label{
+			font-size: 17px
+		}
+		
+		textarea{
+			margin: 25px;
+			border-radius: 10px;
+			padding: 10px;
+			background-color: #E6F3E4;
+			color: green;
+		}
+		
+		#wrapper {
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		  }
+		  
+		  #everything{
+			display: block;
+			margin: 0 auto;
+			min-width: 400px;
+			width: 25vw;
+			border-radius: 25px;
+			background-color: #9DC1CA;
+			text-align: center;
+			padding: 40px;
+		
+		  }
+		
+		  .flag {
+			position: absolute;
+			font-size: 60px;
+			animation-name: flag-animation;
+			animation-duration: 2s;
+			animation-iteration-count: infinite;
+			opacity: 0;
+			z-index: -10
+		  }
+		  
+		  @keyframes flag-animation {
+			0% {opacity: 0;}
+			50% {opacity: 0.5;}
+			100% {opacity: 0;}
+		  }
+
+		  button, #sub {
+			background-color: black;
+			color: white;
+			border-radius: 20px;
+			padding: 10px 20px;
+			border: none;
+			cursor: pointer;
+		  }
+
+		  button:hover, #sub:hover {
+			background-color: white;
+			color: black;
+		  }
+		</style>
+
+
+
 </head>
 <body>
 	<div id="flag-container"></div>
 	<div id = "wrapper">
   <div id = "everything">
+  <img src = 'https://cdn.discordapp.com/attachments/1033649673115799563/1079212611926769746/Untitled_design_2.gif' style = "width: 150px;">
   <h1>Friend Flow</h1>
   <form action="/analyze" method="POST" enctype="multipart/form-data">
 
-	<label for="input">Select input type:</label> <br/>
+	<label for="input">Select input type:</label> <br/><br/>
 	<input type="radio" id="input" name="input" value="text" checked>
-	<label for="text">Text</label>
+	<label for="text">Text</label>  <br/>
 	<input type="radio" id="input" name="input" value="audio">
 	<label for="audio">Audio</label>
 	<br><br>
 
-    <label for="text">Enter text:</label><br>
-    <textarea id="text" name="text" rows="4" cols="50"></textarea><br>
-    <label for="language">Select language:</label>
+	<label for="language">Select language:</label>
     <select id="language" name="language">
       {% for code, name in languages.items() %}
         <option value="{{ code }}">{{ name }}</option>
       {% endfor %}
-    </select>
-    <br> <br>
+    </select><br><br>
+
+    <label for="text">Enter text:</label><br>
+    <textarea id="text" name="text" rows="4" cols="50"></textarea>
+
+    <br> 
   <button type = 'button' onclick="startRecording()">Start Recording</button>
 	<button type = 'button' onclick="stopRecording()">Stop Recording</button>
 	<button type = 'button' onclick="downloadRecording()">Download Recording</button>
     <br><br>
-    <label for="audio">Upload audio file:</label><br/>
+    <label for="audio">Upload audio file:</label>
     <input type="file" id="audio" name="audio" style = "padding-top: 10px"><br>
     <br><br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" id = 'sub'>
   </form>
 </div></div>
   <script>
@@ -97,8 +185,8 @@
 				flagContainer.appendChild(flag);
 				setTimeout(() => {
 				flag.remove();
-				}, 3000);
-			}, 1000);
+				}, 1500);
+			}, 500);
 		}
 
 		spawnFlags();

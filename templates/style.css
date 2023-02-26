@@ -1,5 +1,12 @@
 html, body {
     height: 100vh;
+    overflow: hidden
+}
+
+body{
+    background-image: url("https://i.imgur.com/3W3mpDr.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 *{
@@ -35,7 +42,7 @@ textarea{
     min-width: 400px;
     width: 25vw;
     border-radius: 25px;
-    background-color: lightblue;
+    background-color: #9DC1CA;
     text-align: center;
     padding: 40px;
 
@@ -43,16 +50,16 @@ textarea{
 
   .flag {
     position: absolute;
-    color: black;
+    font-size: 60px;
     animation-name: flag-animation;
-    animation-duration: 3s;
+    animation-duration: 2s;
     animation-iteration-count: infinite;
     opacity: 0;
+    z-index: -10
   }
   
   @keyframes flag-animation {
     0% {opacity: 0;}
-    5% {opacity: 1;}
-    90% {opacity: 1;}
+    50% {opacity: 1;}
     100% {opacity: 0;}
   }

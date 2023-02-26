@@ -1,4 +1,4 @@
-const flags = ['🇺🇸', '🇬🇧', '🇨🇦', '🇫🇷', '🇩🇪', '🇯🇵', '🇧🇷', '🇮🇳', '🇲🇽', '🇨🇳'];
+const flags = ['🌏', '🌎', '🌍'];
 const flagContainer = document.querySelector('#flag-container');
 
 function getRandomNumber(max) {
@@ -19,9 +19,9 @@ function spawnFlags() {
     const flag = createFlag();
     flagContainer.appendChild(flag);
     setTimeout(() => {
-      flag.remove();
-    }, 3000);
-  }, 1000);
+    flag.remove();
+    }, 1500);
+  }, 500);
 }
 
 spawnFlags();

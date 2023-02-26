@@ -2,16 +2,87 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Speech Sentiment Analysis Results</title>
+  <title>Friend Flow</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" type="text/css" href="style.css">
 
+<style>
+  html, body {
+    height: 100vh;
+    overflow: hidden
+}
+
+body{
+    background-color: #353D48
+}
+
+*{
+    font-family: 'Trebuchet MS'
+}
+
+
+h1{
+    font-family: 'Concert One', cursive;
+}
+
+p, label{
+    font-size: 17px
+}
+
+textarea{
+    margin: 25px;
+    border-radius: 10px;
+
+}
+
+#wrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -20px
+  }
+  
+  #everything{
+    display: block;
+    margin: 0 auto;
+    min-width: 400px;
+    min-height: 60vh;
+    width: 45vw;
+    border-radius: 25px;
+    background-color: #9DC1CA;
+    text-align: center;
+    padding: 40px;
+
+  }
+
+  button {
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: white;
+    color: black;
+  }
+
+
+</style>
+
 </head>
 <body>
-  <h1>Speech Sentiment Analysis Results</h1>
+  <div id = "wrapper">
+  <div id = "everything">
+
+  <img src = "https://cdn.discordapp.com/attachments/1033649673115799563/1079218561479876698/Copy_of_ladylights_6.gif" style = "padding-top: 30px">
+  <h1>Friend Flow Analysis</h1>
   <p><strong>Language:</strong> {{ language }}</p>
   <p><strong>Translated Text:</strong> {{ text }}</p>
   <p><strong>Sentiment Analysis:</strong> {{ sentiment }}</p>
@@ -24,6 +95,8 @@
   {% endif %}
 
   <button type = 'button' onclick="speak()">Speak</button>
+
+  </div></div>
 
   <script>
     var language = "{{ language }}";
