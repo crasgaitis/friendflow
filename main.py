@@ -18,7 +18,7 @@ from gtts import gTTS
 
 
 app = Flask(__name__)
-os.environ["OPENAI_API_KEY"] = # api key here
+os.environ["OPENAI_API_KEY"] = "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"
 
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
@@ -49,18 +49,20 @@ def analyze():
     if request.form['input'] == 'audio':
     #if 'audio' in request.files.keys():
         # Convert audio file to text
+        print('audio')
         r = sr.Recognizer()
         file = request.files['audio']
         audio = sr.AudioFile(io.BytesIO(file.read()))
         
         with audio as source:
             audio = r.record(source)
-        text = r.recognize_google(audio, language = "es-ES")
+        text = r.recognize_google(audio, language = "fr-FR")
         
     else:     
         text = request.form['text']
         
     language = request.form['language']
+    language = "fr"
     
     # Translate text to English
     text = translate(text, to_language='en')
@@ -128,7 +130,7 @@ def analyze():
     language_map = {
         'en': 'english',
         'es': 'spanish',
-        'zh': 'chinese (simplified)',
+        'zh-tw': 'chinese (simplified)',
         'fr': 'french',
         'ko': 'korean',
         'de': 'german'
