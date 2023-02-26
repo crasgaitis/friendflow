@@ -18,7 +18,7 @@ from gtts import gTTS
 
 
 app = Flask(__name__)
-os.environ["OPENAI_API_KEY"] = # key here
+os.environ["OPENAI_API_KEY"] = # api key here
 
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
@@ -119,7 +119,6 @@ def analyze():
     string = f"Give me an example response from Person B. Person A: '{text}' Person B: "
     
     suggested_response = generate_response(string)
-    suggested_response = 'what is my name? my name is catherine.'
     suggested_response = suggested_response.split("Person A:")[0]
     suggested_response = suggested_response.strip().replace("'", "")
 
