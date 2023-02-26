@@ -18,7 +18,7 @@ from gtts import gTTS
 
 
 app = Flask(__name__)
-os.environ["OPENAI_API_KEY"] = "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"
+os.environ["OPENAI_API_KEY"] = ""
 
 openai.api_key = os.environ["OPENAI_API_KEY"]
 
